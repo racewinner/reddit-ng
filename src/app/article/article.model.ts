@@ -8,4 +8,13 @@ export class ArticleModel {
     this.title = title;
     this.link = link;
   }
+
+  domain(): string {
+    try {
+      const domainAndPath: string = this.link.split('//')[1];
+      return domainAndPath.split('/')[0];
+    } catch (err) {
+      return '';
+    }
+  }
 }

@@ -24,6 +24,13 @@ export class App {
 
   addArticle(title: HTMLInputElement, link: HTMLInputElement): boolean {
     console.log(`Adding article title: ${title.value} and link: ${link.value}`);
+    this.articles.push(new ArticleModel(title.value, link.value, 0));
+    title.value = '';
+    link.value = '';
     return false;
+  }
+
+  sortedArticles(): ArticleModel[] {
+    return this.articles.sort((a: ArticleModel, b: ArticleModel) => b.votes - a.votes);
   }
 }

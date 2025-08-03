@@ -3,34 +3,27 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Article } from './article/article';
 import { ArticleModel } from './article/article.model';
+import { Product } from './product.model';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, Article],
+  imports: [CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   protected readonly title = signal('angular-reddit');
-  articles: ArticleModel[];
+  product: Product;
 
   constructor() {
-    this.articles = [
-      new ArticleModel('Angular','http://angular.io', 3),
-      new ArticleModel('Fullstack', 'http://fulstack.io', 2),
-      new ArticleModel('Angular Homepage', 'http://angular.io', 1)
-    ]
-  }
+    let newProduct = new Product(
+      "NICEHAT",
+      "ANice Black Hat",
+      "/resources/images/products/black-hat.jpg",
+      ["Men", "Accessories","Hats"],
+      29.99
+    );
 
-  addArticle(title: HTMLInputElement, link: HTMLInputElement): boolean {
-    console.log(`Adding article title: ${title.value} and link: ${link.value}`);
-    this.articles.push(new ArticleModel(title.value, link.value, 0));
-    title.value = '';
-    link.value = '';
-    return false;
-  }
-
-  sortedArticles(): ArticleModel[] {
-    return this.articles.sort((a: ArticleModel, b: ArticleModel) => b.votes - a.votes);
+    this.product = newProduct
   }
 }
